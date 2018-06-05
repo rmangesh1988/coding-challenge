@@ -1,11 +1,13 @@
 package io.bankbridge.handler;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.bankbridge.client.BankApiClient;
 import io.bankbridge.config.RemoteConfig;
+import io.bankbridge.config.RemoteConfigImpl;
 import io.bankbridge.model.BankModel;
 import io.bankbridge.vo.BankVO;
 import spark.Request;
@@ -15,14 +17,9 @@ import static io.bankbridge.helper.ApiHelper.propagateExceptionSoftly;
 
 public class BanksRemoteCalls {
 
-	private RemoteConfig config;
+	private RemoteConfig<Map<String, String>> config;
 
 	private BankApiClient bankApiClient;
-
-	public BanksRemoteCalls() {
-		bankApiClient = new BankApiClient();
-		config = RemoteConfig.getInstance();
-	}
 
 	public BanksRemoteCalls(RemoteConfig config, BankApiClient bankApiClient) {
 		this.config = config;

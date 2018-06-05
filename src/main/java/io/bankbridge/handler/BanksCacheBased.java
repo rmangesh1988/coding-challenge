@@ -9,11 +9,7 @@ import spark.Response;
 
 public class BanksCacheBased {
 
-	private BankCache bankCache;
-
-	public BanksCacheBased() {
-		bankCache = BankCache.getInstance();
-	}
+	private BankCache<String, String> bankCache;
 
 	public BanksCacheBased(BankCache bankCache) {
 		this.bankCache = bankCache;
@@ -23,7 +19,7 @@ public class BanksCacheBased {
 	public List<BankVO> handle(Request request, Response response) {
 		List<BankVO> banks = new ArrayList<>();
 
-		bankCache.getBankCacheFromCacheManager().forEach(entry -> {
+		bankCache.getBanks().forEach(entry -> {
 			banks.add(new BankVO(entry.getKey(), entry.getValue()));
 		});
 

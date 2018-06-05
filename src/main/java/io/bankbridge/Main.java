@@ -1,6 +1,9 @@
 package io.bankbridge;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.bankbridge.cache.BankCacheImpl;
+import io.bankbridge.client.BankApiClient;
+import io.bankbridge.config.RemoteConfigImpl;
 import io.bankbridge.controller.BankController;
 import io.bankbridge.exception.BankExceptionHandler;
 import io.bankbridge.filter.LoggingFilter;
@@ -22,8 +25,8 @@ public class Main {
 		}
 
 		ObjectMapper objectMapper = new ObjectMapper();
-		BanksCacheBased banksCacheBased = new BanksCacheBased();
-		BanksRemoteCalls banksRemoteCalls = new BanksRemoteCalls();
+		BanksCacheBased banksCacheBased = new BanksCacheBased(BankCacheImpl.getInstance());
+		BanksRemoteCalls banksRemoteCalls = new BanksRemoteCalls(RemoteConfigImpl.getInstance(), new BankApiClient());
 
 		//Logging all incoming requests
 		before(LoggingFilter::handle);

@@ -58,7 +58,7 @@ public class BanksCacheBasedTest {
         List<BankVO> expectedBanks = populateBanks();
 
         //When
-        when(bankCache.getBankCacheFromCacheManager()).thenReturn(cache);
+        when(bankCache.getBanks()).thenReturn(cache);
 
         //Then
         List<BankVO> actualBanks = banksCacheBased.handle(request, response);
@@ -66,7 +66,7 @@ public class BanksCacheBasedTest {
         //Result
         assertEquals("Number of banks", expectedBanks.size(), actualBanks.size());
         assertThat(actualBanks).containsExactlyInAnyOrder(expectedBanks.toArray(new BankVO[expectedBanks.size()]));
-        verify(bankCache, times(1)).getBankCacheFromCacheManager();
+        verify(bankCache, times(1)).getBanks();
         verifyNoMoreInteractions(bankCache);
     }
 
