@@ -7,7 +7,7 @@ import java.util.Objects;
  */
 public class BankModelList {
 	
-	public List<BankModel> banks;
+	private List<BankModel> banks;
 
 	public List<BankModel> getBanks() {
 		return banks;

@@ -36,10 +36,10 @@ public class BankCacheImpl implements BankCache<String, String> {
     private void populateCache() {
         Cache cache = getBanks();
         try {
-            BankModelList models = new ObjectMapper().readValue(
+            BankModelList bankList = new ObjectMapper().readValue(
                     Thread.currentThread().getContextClassLoader().getResource("banks-v1.json"), BankModelList.class);
 
-            models.getBanks().forEach(bank -> {
+            bankList.getBanks().forEach(bank -> {
                 cache.put(bank.getBic(), bank.getName());
             });
         } catch (IOException e) {
